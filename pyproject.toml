@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gh-summary"
+version = "0.0.1"
+description = "Summarize commits and pull requests"
+authors = [{name = "Changjun Lee", email = "pord7457@gmail.com"}]
+maintainers = [{name = "Changjun Lee", email = "pord7457@gmail.com"}]
+readme = "README.md"
+keywords = ["git", "summary", "github"]
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = [
+    "requests",
+    "fpdf2"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+gh-summary = "gh_summary.__main__:main"
