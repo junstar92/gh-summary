@@ -8,9 +8,11 @@ class PullRequest(BaseModel):
     repo_url: str
     html_url: str
     diff_url: str
+    api_url: str
     merged_at: str
     title: str
     body: str
+    diff: str = ""
 
     @classmethod
     def from_json(cls, json_data: dict[str, Any]) -> "PullRequest":
@@ -18,6 +20,7 @@ class PullRequest(BaseModel):
             repo_url=json_data["repository_url"],
             html_url=json_data["pull_request"]["html_url"],
             diff_url=json_data["pull_request"]["diff_url"],
+            api_url=json_data["pull_request"]["url"],
             merged_at=json_data["pull_request"]["merged_at"],
             title=json_data["title"],
             body=json_data["body"] or "",

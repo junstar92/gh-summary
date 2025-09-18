@@ -13,6 +13,20 @@ class Commit(BaseModel):
     committer: str
     date: str
     message: str
+    diff: str = ""
+
+    @property
+    def diff_url(self) -> str:
+        """Return a URL to fetch the unified diff for this commit.
+
+        Uses GitHub's ".diff" suffix on the commit HTML URL for simplicity.
+        """
+        return f"{self.html_url}.diff"
+
+    @property
+    def api_diff_url(self) -> str:
+        """API endpoint for commit diff that honors Authorization for private repos."""
+        return f"https://api.github.com/repos/{self.repo_name}/commits/{self.sha}"
 
     @classmethod
     def from_json(cls, json_data: dict[str, Any]) -> "Commit":
